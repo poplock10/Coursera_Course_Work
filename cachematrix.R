@@ -4,14 +4,14 @@
 ## This matrix object can cahe its inverse.
 
 makeCacheMatrix <- function(x = matrix()) {
-  m<-NULL
+  v<-NULL
   set<-function(y){
     x<<-y
     m<<-NULL
   }
   get<-function() x
-  setmatrix<-function(solve) m<<- solve
-  getmatrix<-function() m
+  setmatrix<-function(solve) v<<- solve
+  getmatrix<-function() v
   list(set=set, get=get,
        setmatrix=setmatrix,
        getmatrix=getmatrix)
@@ -22,13 +22,13 @@ makeCacheMatrix <- function(x = matrix()) {
 
 
 cacheSolve <- function(x=matrix(), ...) {
-  m<-x$getmatrix()
+  v<-x$getmatrix()
   if(!is.null(m)){
-    message("getting cached data")
+    message("retrieving cached data")
     return(m)
   }
   matrix<-x$get()
-  m<-solve(matrix, ...)
-  x$setmatrix(m)
+  v<-solve(matrix, ...)
+  x$setmatrix(v)
   m
 }
